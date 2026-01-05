@@ -1,0 +1,221 @@
+// for web
+// use npm 
+npm install firebase
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC4OIzA4RwsmXdh0GK6x6LJnRHuz5VCsn8",
+  authDomain: "sales-tracker-app-60e24.firebaseapp.com",
+  projectId: "sales-tracker-app-60e24",
+  storageBucket: "sales-tracker-app-60e24.firebasestorage.app",
+  messagingSenderId: "621062689966",
+  appId: "1:621062689966:web:82876b6c6234fa2120893f"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// use a script tag
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyC4OIzA4RwsmXdh0GK6x6LJnRHuz5VCsn8",
+    authDomain: "sales-tracker-app-60e24.firebaseapp.com",
+    projectId: "sales-tracker-app-60e24",
+    storageBucket: "sales-tracker-app-60e24.firebasestorage.app",
+    messagingSenderId: "621062689966",
+    appId: "1:621062689966:web:82876b6c6234fa2120893f"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
+
+
+
+// IOS
+// SwiftUI
+import SwiftUI
+import FirebaseCore
+
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
+
+@main
+struct YourApp: App {
+  // register app delegate for Firebase setup
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
+
+  var body: some Scene {
+    WindowGroup {
+      NavigationView {
+        ContentView()
+      }
+    }
+  }
+}
+
+//swift
+import UIKit
+import FirebaseCore
+
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+  var window: UIWindow?
+
+  func application(_ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions:
+      [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
+
+//Objective C
+@import UIKit;
+@import FirebaseCore;
+
+
+@implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [FIRApp configure];
+
+  return YES;
+}
+
+
+
+
+{% comment %} for android {% endcomment %}
+// To make the google-services.json config values accessible to Firebase SDKs, you need the Google services Gradle plugin.
+{% comment %} Add the plugin as a dependency to your project-level build.gradle.kts file:
+
+Root-level (project-level) Gradle file (<project>/build.gradle.kts): {% endcomment %}
+// Kotlin DSL (build.gradle.kts)
+plugins {
+  // ...
+
+  // Add the dependency for the Google services Gradle plugin
+  id("com.google.gms.google-services") version "4.4.4" apply false
+
+}
+// Add the plugin as a dependency to your project-level build.gradle file:
+
+// Root-level (project-level) Gradle file (<project>/build.gradle):
+
+plugins {
+  // ...
+
+  // Add the dependency for the Google services Gradle plugin
+  id 'com.google.gms.google-services' version '4.4.4' apply false
+
+}
+{% comment %} Then, in your module (app-level) build.gradle.kts file, add both the google-services plugin and any Firebase SDKs that you want to use in your app:
+
+Module (app-level) Gradle file (<project>/<app-module>/build.gradle.kts): {% endcomment %}
+
+// Kotlin DSL (build.gradle.kts)
+
+plugins {
+  id("com.android.application")
+
+  // Add the Google services Gradle plugin
+  id("com.google.gms.google-services")
+
+  ...
+  }
+
+dependencies {
+  // Import the Firebase BoM
+  implementation(platform("com.google.firebase:firebase-bom:34.7.0"))
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+  // When using the BoM, don't specify versions in Firebase dependencies
+  // https://firebase.google.com/docs/android/setup#available-libraries
+}
+
+// Groovy (build.gradle)
+{% comment %} Then, in your module (app-level) build.gradle file, add both the google-services plugin and any Firebase SDKs that you want to use in your app:
+
+Module (app-level) Gradle file (<project>/<app-module>/build.gradle): {% endcomment %}
+
+plugins {
+  id 'com.android.application'
+
+  // Add the Google services Gradle plugin
+  id 'com.google.gms.google-services'
+
+  ...
+}
+
+dependencies {
+  // Import the Firebase BoM
+  implementation platform('com.google.firebase:firebase-bom:34.7.0')
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+  // When using the BoM, don't specify versions in Firebase dependencies
+  // https://firebase.google.com/docs/android/setup#available-libraries
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// floatingActionButton: FloatingActionButton(
+      //   tooltip: 'Firestore test',
+      //   child: const Icon(Icons.cloud_upload),
+      //   onPressed: () async {
+      //     try {
+      //       await FirebaseFirestore.instance.collection('test').add({
+      //         'message': 'Hello Firestore',
+      //         'time': Timestamp.now(),
+      //       });
+      //       ScaffoldMessenger.of(context).showSnackBar(
+      //         const SnackBar(content: Text('Wrote test document to Firestore')),
+      //       );
+      //     } catch (e) {
+      //       ScaffoldMessenger.of(context).showSnackBar(
+      //         SnackBar(content: Text('Failed to write: $e')),
+      //       );
+      //     }
+      //   },
+      // ),

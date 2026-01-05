@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCGl-FI7D8tR8zfQEz-4mgcV_oS8KF-Ifo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>621062689966</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.salestracker</string>
+	<key>PROJECT_ID</key>
+	<string>sales-tracker-app-60e24</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sales-tracker-app-60e24.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:621062689966:ios:117c93050db9b10120893f</string>
+</dict>
+</plist>
