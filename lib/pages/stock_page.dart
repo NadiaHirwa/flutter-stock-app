@@ -30,6 +30,15 @@ class _StockPageState extends State<StockPage> {
     final q = _query.trim().toLowerCase();
 
     return allItems.where((it) {
+      // Hide out-of-stock items from the Stock page list
+      final rawQty = it['quantity'] ?? it['qty'] ?? 0;
+      final qty = rawQty is int ? rawQty : int.tryParse(rawQty.toString()) ?? 0;
+      if (qty <= 0) return false;
+
+      // Optional: if you ever add a persisted status field, also respect it
+      final statusStr = (it['status'] ?? '').toString().toLowerCase();
+      if (statusStr == 'out_of_stock') return false;
+
       final typeStr = (it['type'] ?? '').toString();
       if (_filterType != 'All' && typeStr != _filterType) return false;
 
@@ -127,7 +136,7 @@ class _StockPageState extends State<StockPage> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     isExpanded: true,
-                    items: <String>['All', 'New', 'Used']
+                    items: <String>['All', 'New', 'Used', 'Refurbished']
                         .map((t) => DropdownMenuItem(value: t, child: Text(t)))
                         .toList(),
                     onChanged: (v) => setState(() => _filterCondition = v ?? 'All'),

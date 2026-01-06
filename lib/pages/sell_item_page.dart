@@ -88,6 +88,15 @@ class _SellItemPageState extends State<SellItemPage> {
   List<Map<String, dynamic>> filteredItems(List<Map<String, dynamic>> allItems) {
     final q = searchQuery.trim().toLowerCase();
     return allItems.where((item) {
+      // Hide out-of-stock items from the Sell Item list
+      final rawQty = item['quantity'] ?? item['qty'] ?? 0;
+      final qty = rawQty is int ? rawQty : int.tryParse(rawQty.toString()) ?? 0;
+      if (qty <= 0) return false;
+
+      // Optional: respect a persisted status field if present
+      final statusStr = (item['status'] ?? '').toString().toLowerCase();
+      if (statusStr == 'out_of_stock') return false;
+
       final name = (item['name'] ?? '').toString().toLowerCase();
       final type = (item['type'] ?? '').toString().toLowerCase();
       final serial = (item['serial'] ?? item['sku'] ?? '')
