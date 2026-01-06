@@ -435,7 +435,7 @@ class _AddItemPageState extends State<AddItemPage> {
                             decoration: const InputDecoration(
                               labelText: 'Condition',
                             ),
-                            items: ['New', 'Used']
+                            items: ['New', 'Used', 'Refurbished']
                                 .map(
                                   (c) => DropdownMenuItem(
                                     value: c,
