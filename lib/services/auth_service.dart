@@ -4,11 +4,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // Single admin email with full CRUD
+  static const String _adminEmail = 'fhtechnologyltd@gmail.com';
+
   /// Get current user
   static User? get currentUser => _auth.currentUser;
 
   /// Auth state stream
   static Stream<User?> get authStateChanges => _auth.authStateChanges();
+
+  /// True if the current user is the admin
+  static bool get isAdmin {
+    final email = currentUser?.email;
+    if (email == null) return false;
+    return email.toLowerCase() == _adminEmail.toLowerCase();
+  }
 
   /// Sign in with email and password
   static Future<UserCredential> signInWithEmailAndPassword(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/app_data.dart';
 import '../services/firestore_service.dart';
+import '../services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TransactionsPage extends StatefulWidget {
@@ -153,6 +154,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 
   Future<void> _editTransaction(Map<String, dynamic> tx) async {
+    if (!AuthService.isAdmin) return; // admin only
     final transactionId = tx['id'] as String?;
     if (transactionId == null) return;
 
@@ -245,6 +247,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 
   Future<void> _deleteTransaction(String transactionId) async {
+    if (!AuthService.isAdmin) return; // admin only
     final confirm = await showDialog<bool>(
       context: context,
       builder: (c) => AlertDialog(
@@ -539,6 +542,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                               PopupMenuButton<String>(
                                 icon: const Icon(Icons.more_vert),
                                 onSelected: (value) {
+                                  if (!AuthService.isAdmin) return;
                                   if (value == 'edit' && transactionId != null) {
                                     _editTransaction(tx);
                                   } else if (value == 'delete' && transactionId != null) {
@@ -546,14 +550,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   }
                                 },
                                 itemBuilder: (context) => [
-                                  const PopupMenuItem(
-                                    value: 'edit',
-                                    child: Text('Edit'),
-                                  ),
-                                  const PopupMenuItem(
-                                    value: 'delete',
-                                    child: Text('Delete'),
-                                  ),
+                                  if (AuthService.isAdmin)
+                                    const PopupMenuItem(
+                                      value: 'edit',
+                                      child: Text('Edit'),
+                                    ),
+                                  if (AuthService.isAdmin)
+                                    const PopupMenuItem(
+                                      value: 'delete',
+                                      child: Text('Delete'),
+                                    ),
                                 ],
                               ),
                             ],

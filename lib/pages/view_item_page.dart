@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/app_data.dart';
 import '../services/firestore_service.dart';
+import '../services/auth_service.dart';
 import 'add_item_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -113,20 +114,22 @@ class _ViewItemPageState extends State<ViewItemPage> {
           appBar: AppBar(
             title: Text(it['name'] ?? it['type'] ?? 'Item'),
             actions: [
-              IconButton(
-                onPressed: _isDeleting ? null : () => _edit(it),
-                icon: const Icon(Icons.edit),
-              ),
-              IconButton(
-                onPressed: _isDeleting ? null : _delete,
-                icon: _isDeleting
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Icon(Icons.delete),
-              ),
+              if (AuthService.isAdmin)
+                IconButton(
+                  onPressed: _isDeleting ? null : () => _edit(it),
+                  icon: const Icon(Icons.edit),
+                ),
+              if (AuthService.isAdmin)
+                IconButton(
+                  onPressed: _isDeleting ? null : _delete,
+                  icon: _isDeleting
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.delete),
+                ),
             ],
           ),
           body: SingleChildScrollView(

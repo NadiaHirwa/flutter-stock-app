@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'transactions_page.dart';
 import '../data/app_data.dart';
 import '../services/firestore_service.dart';
+import '../services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SellItemPage extends StatefulWidget {
@@ -239,8 +240,14 @@ class _SellItemPageState extends State<SellItemPage> {
 
       // Update stock item in Firebase
       if (sellQty >= stockQty) {
-        // Remove item completely
-        await FirestoreService.deleteItem(selectedItemId!);
+        // Remove item completely — only admin can delete; staff just set qty to 0
+        if (AuthService.isAdmin) {
+          await FirestoreService.deleteItem(selectedItemId!);
+        } else {
+          await FirestoreService.updateItem(selectedItemId!, {
+            'quantity': 0,
+          });
+        }
       } else {
         // Update remaining quantity and prices
         final remaining = stockQty - sellQty;

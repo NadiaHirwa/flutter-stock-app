@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/app_data.dart';
 import '../services/firestore_service.dart';
+import '../services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddItemPage extends StatefulWidget {
@@ -141,6 +142,17 @@ class _AddItemPageState extends State<AddItemPage> {
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
     if (_isLoading) return;
+
+    // Editing existing item is admin-only
+    if (widget.itemId != null && !AuthService.isAdmin) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Only the owner can edit existing items.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
 
     setState(() => _isLoading = true);
 
