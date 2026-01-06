@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   'Sign in to manage your stock and sales',
                   style: theme.textTheme.bodyMedium
-                      ?.copyWith(color: Colors.grey[700]),
+                      ?.copyWith(color: const Color.fromARGB(255, 79, 79, 79)),
                 ),
                 const SizedBox(height: 24),
                 Card(
